@@ -1,12 +1,43 @@
-.delete-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  margin-left: 10px;
-  transition: transform 0.2s ease;
+.message {
+  padding: 12px 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.2s ease;
+  cursor: grab;
+  backdrop-filter: blur(6px);
 }
 
-.delete-btn:hover {
-  transform: scale(1.2);
+/* Hover */
+.message:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* När man drar */
+.message.dragging {
+  opacity: 0.5;
+  transform: scale(0.95);
+  cursor: grabbing;
+}
+
+
+#deleteZone {
+  margin-top: 20px;
+  padding: 18px;
+  text-align: center;
+  border-radius: 16px;
+  border: 2px dashed rgba(255, 0, 0, 0.4);
+  color: rgba(255, 0, 0, 0.7);
+  font-weight: bold;
+  transition: all 0.25s ease;
+}
+
+/* När du drar över */
+#deleteZone.hover {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: red;
+  color: white;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4);
 }

@@ -2,6 +2,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebas
 import { getAuth, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
 import { getDatabase, ref, set, push, get } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 import { censorBadWords } from "./censor.js";
+import { setupDragAndDelete } from "./dragdelete.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyASUiN6n-p9_B9Ruox6l3ZmW6qbQx3kRgY",
@@ -68,7 +69,7 @@ export async function deleteUser(userKey) {
   }
 }
 
-//  Visa users/messages i DOM 
+
 export function displayAllUsers(users) {
   const messagesList = document.getElementById("messagesList");
   messagesList.innerHTML = "";
@@ -77,27 +78,58 @@ export function displayAllUsers(users) {
   Object.entries(users).forEach(([key, user]) => {
     const div = document.createElement("div");
     div.classList.add("message");
+    div.setAttribute("draggable", true);
+    div.dataset.key = key;
+
     div.innerHTML = `
       <span>${user.name}: ${user.message || "Inget meddelande"}</span>
-      <button class="delete-btn" data-key="${key}">🗑️</button>
     `;
+
+    // 🔥 DRAG START
+    div.addEventListener("dragstart", (e) => {
+      e.dataTransfer.setData("text/plain", key);
+      div.classList.add("dragging");
+    });
+
+    div.addEventListener("dragend", () => {
+      div.classList.remove("dragging");
+    });
+
     messagesList.appendChild(div);
   });
-
-  // Lägg till event listeners för delete-knappar
-  document.querySelectorAll(".delete-btn").forEach(btn => {
-    btn.addEventListener("click", async (e) => {
-      const key = e.target.dataset.key;
-      const success = await deleteUser(key);
-      if (success) {
-        const updatedUsers = await getAllUsers();
-        displayAllUsers(updatedUsers);
-      } else {
-        alert("Misslyckades att ta bort meddelandet");
-      }
-    });
-  });
 }
+
+
+
+// const deleteZone = document.getElementById("deleteZone");
+
+// deleteZone.addEventListener("dragover", (e) => {
+//   e.preventDefault();
+//   deleteZone.classList.add("hover");
+// });
+
+// deleteZone.addEventListener("dragleave", () => {
+//   deleteZone.classList.remove("hover");
+// });
+
+// deleteZone.addEventListener("drop", async (e) => {
+//   e.preventDefault();
+//   deleteZone.classList.remove("hover");
+
+//   const key = e.dataTransfer.getData("text/plain");
+
+//   if (key) {
+//     const success = await deleteUser(key);
+
+//     if (success) {
+//       const users = await getAllUsers();
+//       displayAllUsers(users);
+//     } else {
+//       alert("Kunde inte ta bort meddelandet");
+//     }
+//   }
+// });
+
 
 // Event listener för knappen 
 const postBtn = document.getElementById("postBtn");
@@ -138,9 +170,10 @@ postBtn.addEventListener("click", async () => {
 (async function init() {
   const users = await getAllUsers();
   displayAllUsers(users);
+    setupDragAndDelete(deleteUser, getAllUsers, displayAllUsers);
+
 })();
 
-//har mer att fixa at, skall fixa att undefined inte visas om user redan finns i firebase manuellt.
 
 
 // Logga in med google genom firebase / Henrik
