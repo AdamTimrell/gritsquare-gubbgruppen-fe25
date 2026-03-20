@@ -77,7 +77,16 @@ export function displayAllUsers(users) {
 
   Object.entries(users).forEach(([key, user]) => {
     const div = document.createElement("div");
-    div.classList.add("message");
+    div.classList.add(
+      "message",
+      "list-group-item",
+      "list-group-item-action",
+      "bg-white",
+      "text-dark",
+      "border-secondary",
+      "rounded-3",
+      "mb-2"
+    );
     div.setAttribute("draggable", true);
     div.dataset.key = key;
 
