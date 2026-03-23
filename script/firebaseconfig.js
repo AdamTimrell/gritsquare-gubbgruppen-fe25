@@ -115,11 +115,11 @@ const usernameInput = document.getElementById("usernameInput");
 const usernameCol = document.getElementById("usernameCol");
 const messageInput = document.getElementById("messageInput");
 
-postBtn.addEventListener("click", async () => {
-  const currentUser = auth.currentUser;
-  const rawName = currentUser ? currentUser.displayName : usernameInput.value.trim();
-  // Censurera namn och meddelande innan vi skickar
-  const censoredName = censorBadWords(rawName);
+postBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  // Censurera namn och meddelande
+  const censoredName = censorBadWords(usernameInput.value.trim());
   const censoredMessage = censorBadWords(messageInput.value.trim());
 
   const userObj = {
@@ -138,6 +138,10 @@ postBtn.addEventListener("click", async () => {
   if (response) {
     const users = await getAllUsers();
     displayAllUsers(users);
+
+    // Spela upp pop-ljud
+    const audio = new Audio("../pop.mp3");
+    audio.play().catch(err => console.warn("Audio playback failed:", err));
 
     // Töm inputfält
     if (!currentUser) usernameInput.value = "";
