@@ -31,6 +31,11 @@ body {
   color: var(--text);
 }
 
+/* Fix Bootstrap's text-light in light mode */
+:root[data-theme="light"] .text-light {
+  color: var(--text) !important;
+}
+
 /* Message */
 .message {
   padding: 12px 16px;
@@ -122,6 +127,28 @@ body {
 
 .active  {
   color: var(--surface) !important
+}
+
+.footer-social a {
+  color: var(--text) !important;
+  opacity: 0.7;
+  font-size: 1.25rem;
+  transition: color 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-social a:hover {
+  color: var(--accent) !important;
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.footer-social .bi {
+  display: inline-block;
+}
+
+footer .text-muted {
+  color: var(--text) !important;
+  opacity: 0.7;
 }
 
 .btn-burnt-peach {
