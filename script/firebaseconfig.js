@@ -109,16 +109,20 @@ export function displayAllUsers(users) {
 }
 
 
+// Håller koll på inloggad användare
+let currentUser = null;
+
 // Event listener för knappen 
 const postBtn = document.getElementById("postBtn");
 const usernameInput = document.getElementById("usernameInput");
 const usernameCol = document.getElementById("usernameCol");
 const messageInput = document.getElementById("messageInput");
 
-postBtn.addEventListener("click", async () => {
-  const currentUser = auth.currentUser;
+postBtn.addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  // Censurera namn och meddelande
   const rawName = currentUser ? currentUser.displayName : usernameInput.value.trim();
-  // Censurera namn och meddelande innan vi skickar
   const censoredName = censorBadWords(rawName);
   const censoredMessage = censorBadWords(messageInput.value.trim());
 
@@ -138,6 +142,10 @@ postBtn.addEventListener("click", async () => {
   if (response) {
     const users = await getAllUsers();
     displayAllUsers(users);
+
+    // Spela upp pop-ljud
+    const audio = new Audio("../pop.mp3");
+    audio.play().catch(err => console.warn("Audio playback failed:", err));
 
     // Töm inputfält
     if (!currentUser) usernameInput.value = "";
@@ -167,6 +175,7 @@ const signedInItem = document.getElementById("signedInItem");
 const signedInLabel = document.getElementById("signedInLabel");
 
 onAuthStateChanged(auth, (user) => {
+  currentUser = user || null;
   if (user) {
     console.log("User is signed in:", user.displayName);
     if (loginItem) loginItem.style.display = "none";
