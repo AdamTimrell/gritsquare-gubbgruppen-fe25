@@ -1,5 +1,5 @@
-const baseUrlUsers = "https://flaskpost-8eeb9-default-rtdb.europe-west1.firebasedatabase.app/users";
-const favoritesBaseUrl = "https://flaskpost-8eeb9-default-rtdb.europe-west1.firebasedatabase.app/favorites";
+const baseUrlUsers = "https://flaskpost-8adcc-default-rtdb.europe-west1.firebasedatabase.app/users";
+const favoritesBaseUrl = "https://flaskpost-8adcc-default-rtdb.europe-west1.firebasedatabase.app/favorites";
 const baseUrl = "https://flaskpost-8adcc-default-rtdb.europe-west1.firebasedatabase.app/";
 
 export async function getAllUsers() {
