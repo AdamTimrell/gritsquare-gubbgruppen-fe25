@@ -9,16 +9,15 @@ document.addEventListener('DOMContentLoaded', function() {
   
   const TERMS_ACCEPTED_KEY = 'gubbChat_termsAccepted';
 
-  // Clear old localStorage to show modal (for testing/resetting)
-  // Comment this line out after you've verified the modal works
-  localStorage.removeItem(TERMS_ACCEPTED_KEY);
+  
+//   localStorage.removeItem(TERMS_ACCEPTED_KEY);
 
   // Check if user has already accepted terms
   function hasUserAcceptedTerms() {
     return localStorage.getItem(TERMS_ACCEPTED_KEY) === 'true';
   }
-
-  // Show the modal
+localStorage.setItem(TERMS_ACCEPTED_KEY, 'true');
+  
   function showTermsModal() {
     if (termsModal) {
       termsModal.classList.remove('hidden');
