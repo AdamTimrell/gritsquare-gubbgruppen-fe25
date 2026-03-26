@@ -1,0 +1,14 @@
+ /* CSS för emoji/color picker (Elin) */
+ #emojis {
+      font-size: 22px;
+      padding: 4px;
+      border-radius: 6px;
+    }
+#textColorPicker {
+      width: 40px;
+      height: 40px;
+      border: none;
+      padding: 0;
+      margin-right: 5px;
+      cursor: pointer;
+  }

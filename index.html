@@ -2,36 +2,114 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/jpeg" href="GCfavico.jpg">
   <title>Gubb Chat </title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/trail.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-  <script src="script/firebaseconfig.js" type="module" defer></script>
+  <script src="script/main.js" type="module" defer></script>
   <script src="script/theme.js" defer></script>
+  <script src="script/termsConditions.js" defer></script>
+  <script src="script/trail.js" defer></script>
+  <script src="script/translate.js" defer></script>
+    <script src="script/search.js" type="module" defer></script>
   <!-- google fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&display=swap" rel="stylesheet">
+  
 </head>
 <body>
+  <!-- Terms and Conditions Modal -->
+  <div id="termsModal" class="terms-modal" style="display: none;">
+    <div class="terms-modal-content">
+      <div class="terms-modal-header">
+        <h2>Terms & Conditions</h2>
+        <button class="terms-close-btn" id="declineBtn">&times;</button>
+      </div>
+      <div class="terms-modal-body">
+        <p><strong>Welcome to Gubb Chat</strong></p>
+        <p>Please read these terms and conditions carefully before using our service. By accessing and using Gubb Chat, you accept and agree to be bound by the terms and provision of this agreement.</p>
+        
+        <h4>1. Use License</h4>
+        <p>Permission is granted to temporarily download one copy of the materials (information or software) on Gubb Chat for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+        <ul>
+          <li>Modifying or copying the materials</li>
+          <li>Using the materials for any commercial purpose or for any public display</li>
+          <li>Attempting to decompile or reverse engineer any software contained on the site</li>
+          <li>Removing any copyright or other proprietary notations from the materials</li>
+          <li>Transferring the materials to another person or "mirroring" the materials on any other server</li>
+        </ul>
+
+        <h4>2. Acceptable Use</h4>
+        <p>You agree not to post content that is:</p>
+        <ul>
+          <li>Illegal, threatening, abusive, defamatory, obscene, or otherwise objectionable</li>
+          <li>Profane, offensive, or inappropriate</li>
+          <li>That infringes upon patents, trademarks, copyrights, or other intellectual property rights</li>
+          <li>Spam or promotional in nature</li>
+        </ul>
+
+        <h4>3. Content Responsibility</h4>
+        <p>You are responsible for all content you post on Gubb Chat. We reserve the right to remove any content that violates these terms.</p>
+
+        <h4>4. Limitation of Liability</h4>
+        <p>In no event shall Gubb Chat be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on Gubb Chat.</p>
+
+        <h4>5. Modifications of Terms</h4>
+        <p>Gubb Chat may revise these terms of service at any time without notice. By using this site, you are agreeing to be bound by the then current version of these terms of service.</p>
+      </div>
+      <div class="terms-modal-footer">
+        <div class="terms-checkbox-wrapper">
+          <input type="checkbox" id="agreeCheckbox" class="form-check-input">
+          <label for="agreeCheckbox" class="form-check-label">I agree to the Terms & Conditions</label>
+        </div>
+        <div class="terms-buttons">
+          <button id="declineTermsBtn" class="btn btn-outline-secondary">Decline</button>
+          <button id="acceptTermsBtn" class="btn btn-burnt-peach" disabled>Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="bg-main">
     <div class="container">
-      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+      <header class="d-flex flex-wrap justify-content-between align-items-center py-3 mb-4 border-bottom">
+        <a href="index.html" class="d-flex align-items-center text-dark text-decoration-none">
           <!-- <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg> -->
           <span class="fs-2 bitcount-prop-double burnt-peach">Gubb Chat</span>
         </a>
 
-        <ul class="nav nav-pills align-items-center">
-          <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
-          <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
-          <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-          <li class="nav-item ms-2"><button id="loginBtn" class="btn btn-outline-secondary btn-sm">Sign in with Google</button></li>
-          <li class="nav-item ms-2">
-            <button id="themeToggle" class="btn btn-burnt-peach btn-sm" type="button">Light mode</button>
-          </li>
-          <li class="nav-item ms-2" id="logoutItem" style="display:none"><button id="logoutBtn" class="btn btn-outline-danger btn-sm">Sign out</button></li>
-        </ul>
+        <button class="burger-btn d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+          <span class="burger-bar"></span>
+        </button>
+
+        <div class="collapse w-100 d-md-flex justify-content-end" id="navMenu">
+          <ul class="nav nav-pills align-items-md-center flex-column flex-md-row align-items-start mt-2 mt-md-0">
+            <li class="nav-item me-md-2">
+              <form id="searchForm" class="d-flex gap-1">
+                <input type="text" name="search" id="searchBar" class="form-control form-control-sm" placeholder="Search by username"/>
+                <button type="submit" class="btn btn-outline-secondary btn-sm">Search</button>
+              </form>
+            </li>
+            <li class="nav-item"><a href="index.html" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="contact.html" class="nav-link">Contact us</a></li>
+            <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+            <li class="nav-item ms-md-2" id="loginItem"><button id="loginBtn" class="btn btn-outline-secondary btn-sm">Sign in with Google</button></li>
+            <li class="nav-item ms-md-2" id="signedInItem" style="display:none"><span id="signedInLabel" class="navbar-text small"></span></li>
+            <li class="nav-item ms-md-2" id="logoutItem" style="display:none"><button id="logoutBtn" class="btn btn-outline-danger btn-sm">Sign out</button></li>
+            <li class="nav-item ms-md-2">
+              <button id="themeToggle" class="btn btn-burnt-peach btn-sm" type="button">Light mode</button>
+            </li>
+            <li class="nav-item ms-md-2 d-flex align-items-center">
+              <a id="google_translate_element"></a>
+            </li>
+          </ul>
+        </div>
       </header>
     </div>
   </div>
@@ -39,23 +117,42 @@
      <h1 class="white">💬 Gubb Chat</h1>
 
     <form id="chatForm" class="row g-2 align-items-center mb-3">
-      <div class="col-12 col-md-3">
+      <div class="col-12 col-md-3" id="usernameCol">
         <label for="usernameInput" class="form-label visually-hidden">Your name</label>
         <input type="text" id="usernameInput" class="form-control" placeholder="Your name" autocomplete="name" required>
       </div>
-      <div class="col-12 col-md-7">
+      <div class="col-12 col-md-4">
         <label for="messageInput" class="form-label visually-hidden">Write a message</label>
         <input type="text" id="messageInput" class="form-control" placeholder="Write a message..." required>
       </div>
-      <div class="col-12 col-md-2 d-grid">
-        <button id="postBtn" type="submit" class="btn btn-burnt-peach">Post</button>
+       <!--Emoji/color picker feature tillagd-->
+       <div class="col-12 col-md-4 d-flex emoji-post-group">
+        <select id="emojis"></select>
+         <div class="d-flex align-items-center gap-2 rounded px-2 py-1 color-picker-group">
+           <label for="textColorPicker" class="form-label mb-0">Textfärg:</label>
+           <div class="color-swatch-wrapper">
+             <div id="colorSwatchPreview" class="color-swatch-preview" style="background-color:#000000;"></div>
+             <input type="color" id="textColorPicker" value="#000000" title="Choose text color">
+           </div>
+         </div>
+        <button id="postBtn" type="submit" class="btn btn-burnt-peach flex-grow-1">Post</button>
       </div>
+      
     </form>
+
+<div class="d-flex gap-2 my-3">
+  <button id="sortTimeBtn" class="btn btn-outline-secondary btn-sm">Sort by Time</button>
+  <button id="sortNameBtn" class="btn btn-outline-secondary btn-sm">Sort by Name</button>
+  <button id="sortFavoritesBtn" class="btn btn-outline-secondary btn-sm">Filter non-favorites</button>
+</div>
 
     <div id="messagesList" class="messages list-group list-group-flush mb-3"></div>
   </div>
 
-  <div id="deleteZone">🗑️ Dra hit för att ta bort</div>
+  <div class="dropzones">
+    <div id="favoriteZone">⭐ Dra hit för favorit</div>
+    <div id="deleteZone">🗑️ Dra hit för att ta bort</div>
+  </div>
 
     <div class="container">
   <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
@@ -64,14 +161,16 @@
     </div>
 
     <ul class="nav col-md-6 justify-content-end list-unstyled d-flex footer-social">
-      <li class="ms-3"><a class="text-muted" href="#" aria-label="Follow us on X"><i class="bi bi-twitter-x"></i></a></li>
-      <li class="ms-3"><a class="text-muted" href="#" aria-label="Follow us on Instagram"><i class="bi bi-instagram"></i></a></li>
-      <li class="ms-3"><a class="text-muted" href="#" aria-label="Follow us on Facebook"><i class="bi bi-facebook"></i></a></li>
+      <li class="ms-3"><a class="text-muted" href="https://x.com" aria-label="Follow us on X" target="_blank" rel="noopener noreferrer"><i class="bi bi-twitter-x"></i></a></li>
+      <li class="ms-3"><a class="text-muted" href="https://instagram.com" aria-label="Follow us on Instagram" target="_blank" rel="noopener noreferrer"><i class="bi bi-instagram"></i></a></li>
+      <li class="ms-3"><a class="text-muted" href="https://facebook.com" aria-label="Follow us on Facebook" target="_blank" rel="noopener noreferrer"><i class="bi bi-facebook"></i></a></li>
     </ul>
   </footer>
 </div>
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</body>
+   <script src="./script/emoji.js"></script>
+<div id="fireworkContainer"></div>
+  </body>
 </html>
 
 
