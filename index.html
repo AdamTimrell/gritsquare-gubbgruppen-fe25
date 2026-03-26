@@ -128,8 +128,13 @@
        <!--Emoji/color picker feature tillagd-->
        <div class="col-12 col-md-4 d-flex emoji-post-group">
         <select id="emojis"></select>
-         <label for="textColorPicker" class="form-label mb-0 text-black">Textfärg:</label>
-        <input type="color" id="textColorPicker" value="#000000" title="Choose text color">
+         <div class="d-flex align-items-center gap-2 rounded px-2 py-1 color-picker-group">
+           <label for="textColorPicker" class="form-label mb-0">Textfärg:</label>
+           <div class="color-swatch-wrapper">
+             <div id="colorSwatchPreview" class="color-swatch-preview" style="background-color:#000000;"></div>
+             <input type="color" id="textColorPicker" value="#000000" title="Choose text color">
+           </div>
+         </div>
         <button id="postBtn" type="submit" class="btn btn-burnt-peach flex-grow-1">Post</button>
       </div>
       

@@ -7,8 +7,10 @@ export function setupPostForm({ displayAllUsers }) {
   const messageInput = document.getElementById("messageInput");
   const colorPicker = document.getElementById("textColorPicker");
 
-   colorPicker.addEventListener("input", () => {
+  colorPicker.addEventListener("input", () => {
     messageInput.style.color = colorPicker.value;
+    const swatch = document.getElementById("colorSwatchPreview");
+    if (swatch) swatch.style.backgroundColor = colorPicker.value;
   });
 
   postBtn.addEventListener("click", async (e) => {

@@ -84,7 +84,7 @@ export const renderReplies = async (replies, parent_id, repliesDiv) => {
             );
 
             replyDiv.innerHTML = `
-            <p>${element.message}</p>
+            <p style="color: ${element.color || '#000000'}">${element.message}</p>
                 </div>
                 <div class="message-time-div rounded">
                 <small class="message-time">${new Date(element.createdAt).toLocaleString("sv-SE")}</small>

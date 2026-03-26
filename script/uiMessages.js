@@ -116,13 +116,14 @@ export function displayAllUsers(
                 const data = new FormData(form);
 
                 const reply = data.get("reply-message");
+                const replyColor = document.getElementById("textColorPicker")?.value || "#000000";
 
                 if (!reply) {
                     alert("dont send empty reply");
                     return;
                 }
 
-                sendReply(key, reply);
+                sendReply(key, reply, replyColor);
                 console.log(reply);
             });
 

@@ -3,7 +3,7 @@ import { censorBadWords } from "./censor.js";
 import { displayAllUsers } from "./uiMessages.js";
 import { getAllUsers } from "./userApi.js";
 
-export const sendReply = async (messageKey, text = "") => {
+export const sendReply = async (messageKey, text = "", color = "#000000") => {
 
     if (!text || !text.trim()) {
         return alert("Skriv ett svar först.");
@@ -19,6 +19,7 @@ export const sendReply = async (messageKey, text = "") => {
 
     const replyData = {
         message: safeMessage,
+        color: color,
         parent_id: messageKey,
         user_id: 0,
         createdAt: Date.now(),
