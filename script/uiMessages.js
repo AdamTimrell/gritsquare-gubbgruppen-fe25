@@ -154,7 +154,7 @@ export function displayAllUsers(
                     ${window.currentUserId
                         ? `<form class="flex"> 
                         <input name="reply-message" type="text"/>
-                        <button type="submit">Send Reply!</button>
+                        <button type="submit" class="btn btn-burnt-peach btn-sm">Send Reply!</button>
                     </form>`
                         : `<p class="text-muted small">You must be signed in to reply.</p>`
                     }
